@@ -5,7 +5,7 @@
     "version": "2.0.1",
     "publisher": "talhabalaj",
     "engines": {
-        "vscode": "^1.6.0"
+        "vscode": "^1.50.0"
     },
     "icon": "images/icon.png",
     "repository": {
