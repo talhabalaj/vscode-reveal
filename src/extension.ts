@@ -128,6 +128,10 @@ function dimEditor(editor: vscode.TextEditor) {
 
     let startPosition = editor.selection.active;
     let endPosition = new vscode.Position(editor.document.lineCount, Number.MAX_VALUE);
+    editor.revealRange(
+      new vscode.Range(startPosition.translate(-2), startPosition.translate(2)),
+      vscode.TextEditorRevealType.AtTop
+    );
     editor.setDecorations(dimDecoration, [new vscode.Range(startPosition, endPosition)]);
 }
 
