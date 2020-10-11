@@ -21,9 +21,14 @@ export function activate(context: vscode.ExtensionContext) {
     let configRegistration = vscode.workspace.onDidChangeConfiguration(initialize);
     let selectionRegistration = vscode.window.onDidChangeTextEditorSelection((e) => updateIfEnabled(e.textEditor));
     let textEditorChangeRegistration = vscode.window.onDidChangeActiveTextEditor((textEditor) => updateIfEnabled(textEditor));
-    let commandRegistration = vscode.commands.registerCommand('dimmer.ToggleDimmer', () => {
-        vscode.workspace.getConfiguration('dimmer').update("enabled", !enabled, commandScope);
-    });
+    let commandRegistration = vscode.commands.registerCommand(
+      "reveal.ToggleReveal",
+      () => {
+        vscode.workspace
+          .getConfiguration("reveal")
+          .update("enabled", !enabled, commandScope);
+      }
+    );
 
     initialize();
 
@@ -46,9 +51,9 @@ function initialize()  {
 }
 
 function readConfig() {
-    let config = vscode.workspace.getConfiguration('dimmer');
+    let config = vscode.workspace.getConfiguration("reveal");
     enabled = config.get('enabled', false);
-    commandScope = config.get('toggleDimmerCommandScope', 'user') === 'user';
+    commandScope = config.get("toggleRevealCommandScope", "user") === "user";
     opacity = config.get('opacity', 50);
     context = config.get('context', 0);
     delay = config.get('delay', 200);
@@ -121,7 +126,7 @@ function undimEditor(editor: vscode.TextEditor) {
 function dimEditor(editor: vscode.TextEditor) {
     if (!dimDecoration) return;
 
-    let startPosition = new vscode.Position(0, 0)
+    let startPosition = editor.selection.active;
     let endPosition = new vscode.Position(editor.document.lineCount, Number.MAX_VALUE);
     editor.setDecorations(dimDecoration, [new vscode.Range(startPosition, endPosition)]);
 }

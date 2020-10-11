@@ -1,23 +1,23 @@
 {
-    "name": "vscode-dimmer",
-    "displayName": "VSCode Dimmer",
+    "name": "vscode-reveal",
+    "displayName": "VSCode Reveal",
     "description": "",
     "version": "2.0.1",
-    "publisher": "hoovercj",
+    "publisher": "talhabalaj",
     "engines": {
         "vscode": "^1.6.0"
     },
     "icon": "images/icon.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/hoovercj/vscode-dimmer.git"
+        "url": "https://github.com/talhabalaj/vscode-reveal.git"
     },
     "bugs": {
-        "url": "https://github.com/hoovercj/vscode-dimmer/issues"
+        "url": "https://github.com/talhabalaj/vscode-reveal/issues"
     },
     "author": {
-        "name": "Cody Hoover",
-        "url": "https://github.com/hoovercj"
+        "name": "Talha Balaj",
+        "url": "https://github.com/talhabalaj"
     },
     "license": "MIT",
     "categories": [
@@ -28,37 +28,39 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "dimmer.ToggleDimmer",
-            "title": "Toggle Dimmer"
-        }],
+        "commands": [
+            {
+                "command": "reveal.ToggleReveal",
+                "title": "Reveal: Toggle Reveal"
+            }
+        ],
         "configuration": {
             "properties": {
-                "dimmer.enabled": {
+                "reveal.enabled": {
                     "default": false,
                     "type": "boolean",
                     "description": "When set to true, the extension will dim non-selected text."
                 },
-                "dimmer.toggleDimmerCommandScope": {
+                "reveal.toggleRevealCommandScope": {
                     "defualt": "user",
                     "type": "string",
                     "enum": [
                         "user",
                         "workspace"
                     ],
-                    "description": "Decides whether the `ToggleDimmer` command will affect the user (global) or workspace (local) settings."
+                    "description": "Decides whether the `ToggleReveal` command will affect the user (global) or workspace (local) settings."
                 },
-                "dimmer.opacity": {
+                "reveal.opacity": {
                     "default": 50,
                     "type": "number",
                     "description": "An integer between 0 and 100 used for the opacity percentage for the dimmed (non-selected) text."
                 },
-                "dimmer.context": {
+                "reveal.context": {
                     "default": 0,
                     "type": "number",
-                    "description": "Number of lines before and after the current line that are not dimmed. 0 will dim everything but lines with a selection and a negative number will dim everything except the curent selection. Defaults to 0."
+                    "description": "Number of lines after the current line that are not dimmed. 0 will dim everything but lines with a selection and a negative number will dim everything except the curent selection. Defaults to 0."
                 },
-                "dimmer.delay": {
+                "reveal.delay": {
                     "default": 0,
                     "type": "number",
                     "description": "Delay in milliseconds for dimming the non-selected text to reduce number of API calls in the event of rapid selection changes. Defaults to 0, but set higher if it feels like it is causing problems."
@@ -72,10 +74,10 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.3",
-        "mocha": "^2.3.3",
+        "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "@types/vscode": "^1.50.0",
+        "mocha": "^2.3.3",
+        "typescript": "^4.0.3"
     }
 }
